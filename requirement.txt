@@ -1,0 +1,81 @@
+# ==========================
+# LangChain
+# ==========================
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+langsmith
+
+# ==========================
+# LLM Providers
+# ==========================
+openai
+langchain-openai
+
+mistralai
+langchain-mistralai
+
+# ==========================
+# Vector Databases
+# ==========================
+chromadb
+faiss-cpu
+
+# ==========================
+# Embeddings
+# ==========================
+sentence-transformers
+transformers
+accelerate
+tiktoken
+
+# ==========================
+# Document Loading
+# ==========================
+pypdf
+unstructured
+beautifulsoup4
+lxml
+python-docx
+python-pptx
+openpyxl
+markdown
+
+# ==========================
+# Environment
+# ==========================
+python-dotenv
+
+# ==========================
+# Data
+# ==========================
+numpy
+pandas
+scikit-learn
+
+# ==========================
+# Backend
+# ==========================
+fastapi
+uvicorn
+
+# ==========================
+# UI
+# ==========================
+# streamlit
+
+# ==========================
+# Utilities
+# ==========================
+requests
+httpx
+tqdm
+rich
+loguru
+
+# ==========================
+# Notebook
+# ==========================
+# jupyter
+# ipykernel
