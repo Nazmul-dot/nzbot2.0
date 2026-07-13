@@ -1,14 +1,50 @@
+"""Chat orchestration: database history, retrieval, prompt, LLM call, and persistence."""
+
 from sqlalchemy.orm import Session
 
-from app.core.config import settings  
+from app.dao.chat_dao import ChatDAO
+from app.dto.chat_dto import ChatMessageDTO, ChatResponseDTO, SingleChatResponse
+from app.service.llm_servise.models import get_llm
+from app.service.llm_servise.retriever import retrieve_context
+from langchain_core.messages import AIMessage, HumanMessage
+from app.service.llm_servise.prompts import chat_prompt
 
 
+class ChatService:
+    @staticmethod
+    def send_message(
+        db: Session, user_id: int, payload: ChatMessageDTO
+    ) -> SingleChatResponse:
+        history_records = ChatDAO.get_chat_history_by_user_id(db, user_id)
+        history = []
+        for record in history_records:
+            history.append(HumanMessage(content=record.message))
+            history.append(AIMessage(content=record.response))
 
-def save_chat(db: Session, payload: ChatMessageDTO) -> ChatMessage:
-    chat:ChatMessage = save_chat_message(db, payload)
-    return SingleChatResponse.model_validate(chat)
+        # Retrieve relevant document chunks for this question
+        context = retrieve_context(payload.message, k=4)
 
+        chain = chat_prompt | get_llm()
+        llm_response = chain.invoke(
+            {
+                "question": payload.message,
+                "history": history,
+                "context": context,
+            }
+        )
+        response_text = str(llm_response.content)
 
-def history(db: Session, user_id: int):
-    chats = get_chat_history_by_user_id(db, user_id)
-    return ChatResponseDTO(messages=[SingleChatResponse.model_validate(chat) for chat in chats])
+        chat = ChatDAO.save_chat_message(
+            db=db,
+            user_id=user_id,
+            message=payload.message,
+            response=response_text,
+        )
+        return SingleChatResponse.model_validate(chat)
+
+    @staticmethod
+    def get_history(db: Session, user_id: int) -> ChatResponseDTO:
+        chats = ChatDAO.get_chat_history_by_user_id(db, user_id)
+        return ChatResponseDTO(
+            messages=[SingleChatResponse.model_validate(chat) for chat in chats]
+        )
