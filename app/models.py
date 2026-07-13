@@ -1,9 +1,9 @@
 from langchain_mistralai import ChatMistralAI
 
-from app.config import MISTRAL_API_KEY
+from app.core.config import settings
 
 llm = ChatMistralAI(
-    model="mistral-small-latest",
-    api_key=MISTRAL_API_KEY,
+    model=settings.MISTRAL_MODEL,
+    api_key=settings.MISTRAL_API_KEY,
     temperature=0.7,
 )

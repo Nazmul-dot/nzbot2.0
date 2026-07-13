@@ -1,6 +1,6 @@
-from dotenv import load_dotenv
-import os
+from app.core.config import settings
 
-load_dotenv()
-
-MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
+MISTRAL_API_KEY = settings.MISTRAL_API_KEY
+MISTRAL_MODEL = settings.MISTRAL_MODEL
+DATABASE_URL = settings.DATABASE_URL
+DATABASE_ECHO = settings.DATABASE_ECHO

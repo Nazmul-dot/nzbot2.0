@@ -46,6 +46,7 @@ markdown
 # Environment
 # ==========================
 python-dotenv
+pydantic-settings
 
 # ==========================
 # Data
@@ -53,6 +54,8 @@ python-dotenv
 numpy
 pandas
 scikit-learn
+sqlalchemy
+psycopg[binary]
 
 # ==========================
 # Backend
