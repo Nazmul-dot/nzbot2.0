@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from app.database.connection import init_db, test_db_connection
+from app.route.chat_route import router as chat_router
 from app.route.user_route import router as user_router
 from app.core.config import settings
 
@@ -30,6 +31,7 @@ def startup_event() -> None:
 
 
 app.include_router(user_router)
+app.include_router(chat_router)
 
 
 if __name__ == "__main__":

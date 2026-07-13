@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.dto.user_dto import UserCreateDTO
-from app.user_model import User
+from app.schema.user_schema import User
 
 
 class UserDAO:

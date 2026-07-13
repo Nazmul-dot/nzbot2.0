@@ -9,7 +9,8 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.core.config import settings
 from app.database.base import Base
-from app.user_model import User  # noqa: F401
+from app.schema.chat_schema import ChatMessage  # noqa: F401
+from app.schema.user_schema import User  # noqa: F401
 
 DATABASE_URL = settings.DATABASE_URL
 if DATABASE_URL.startswith("postgresql://") and "psycopg" not in DATABASE_URL:

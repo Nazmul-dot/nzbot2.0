@@ -10,7 +10,9 @@ It should contain NO business logic and NO direct DB queries.
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.dto.user_dto import UserCreateDTO, UserResponseDTO, UserUpdateDTO
+from app.core.config import settings
+from app.core.security import create_access_token
+from app.dto.user_dto import TokenResponseDTO, UserCreateDTO, UserResponseDTO, UserUpdateDTO
 from app.service.user_service import UserService
 from app.utils.exceptions import AlreadyExistsError, NotFoundError
 
@@ -76,7 +78,11 @@ def list_users(db: Session):
 def login_user(db: Session, email: str, password: str):
     try:
         user: User = UserService.login_user(db, email, password)
-        return UserResponseDTO.model_validate(user)
+        return TokenResponseDTO(
+            access_token=create_access_token(user.id, user.email),
+            expires_in=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+            user=UserResponseDTO.model_validate(user),
+        )
     except NotFoundError as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session
 
 from app.dao.user_dao import UserDAO
 from app.dto.user_dto import UserCreateDTO, UserUpdateDTO
-from app.user_model import User
+from app.schema.user_schema import User
 from app.utils.exceptions import AlreadyExistsError, NotFoundError
 
 

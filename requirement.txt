@@ -62,6 +62,7 @@ psycopg[binary]
 # ==========================
 fastapi
 uvicorn
+PyJWT
 
 # ==========================
 # UI
