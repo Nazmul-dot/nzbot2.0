@@ -12,7 +12,7 @@ from app.core.config import settings
 
 
 # --- 1. Load ---
-pdf_path = Path(__file__).parent / "hole.pdf"
+pdf_path = Path(__file__).parent / "nz.pdf"
 loader = PyPDFLoader(str(pdf_path))
 documents = loader.load()
 print(f"Loaded {len(documents)} page(s)")

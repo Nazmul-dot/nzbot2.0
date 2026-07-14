@@ -4,7 +4,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.dto.chat_dto import ChatMessageDTO, ChatResponseDTO, SingleChatResponse
-from app.service.llm_servise.init_service import ChatService
+from app.service.llm_servise.chat_service import ChatService
 
 
 def send_message(

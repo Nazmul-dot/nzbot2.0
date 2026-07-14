@@ -65,6 +65,7 @@ psycopg[binary]
 fastapi
 uvicorn
 PyJWT
+email-validator
 
 # ==========================
 # UI
