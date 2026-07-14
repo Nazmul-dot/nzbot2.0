@@ -1,2 +1,33 @@
-.venv/
+# Environment
 .env
+.env.*
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Database/local files
+*.sqlite
+*.db
+
+# Build
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
