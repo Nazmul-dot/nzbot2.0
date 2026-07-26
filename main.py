@@ -1,4 +1,4 @@
-from app.chatbot import ask
+from app.chatbotTool import ask
 
 print("Professional Chatbot")
 print("Type 'exit' to quit.")
